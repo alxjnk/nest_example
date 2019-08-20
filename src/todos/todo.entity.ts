@@ -14,6 +14,9 @@ export class Todo extends BaseEntity {
     @Column()
     userType: string;
 
+    @Column()
+    
+
     // @ManyToOne(type => User, user => user.tasks, { eager: false })
     // user: User;
 

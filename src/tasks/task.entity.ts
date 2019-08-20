@@ -1,26 +1,17 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from "typeorm";
-import * as bycrypt from 'bcrypt';
+import { Todo } from "src/todos/todo.entity";
 
 @Entity()
-@Unique(['username'])
+@Unique(['type'])
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    username: string;
-
-    @Column()
     type: string;
 
-    @Column()
-    password: string;
-
-    @Column()
-    salt: string;
-
-    // @OneToMany(type => Task, task => task.user, { eager: true })
-    // tasks: Task[];
+    @OneToMany(type => Todo, todo => todo.task, { eager: true })
+    todos: Todo[];
 
     async validatePassword(password: string): Promise<boolean> {
         const hash = await bycrypt.hash(password, this.salt)
