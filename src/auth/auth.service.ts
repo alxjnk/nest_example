@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.inteface';
-import { User } from './user.entity';
+import { Users } from './user.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +19,7 @@ export class AuthService {
         return this.userRepository.signUp(authCredentialsDto);
     }
 
-    async getUsers(): Promise<User[]> {
+    async getUsers(): Promise<Users[]> {
         return this.userRepository.getUsers()
     }
 

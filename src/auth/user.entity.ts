@@ -3,7 +3,7 @@ import * as bycrypt from 'bcrypt';
 
 @Entity()
 @Unique(['username'])
-export class User extends BaseEntity {
+export class Users extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

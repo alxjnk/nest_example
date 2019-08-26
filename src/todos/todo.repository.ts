@@ -3,7 +3,7 @@ import { Todo } from './todo.entity';
 import { CreateTodoDto } from "./dto/create-todo.dto";
 // import { GetTasksFilterDto } from "./dto/get-tasks-filter.dto";
 // import { User } from "../auth/user.entity";
-import { Logger, InternalServerErrorException } from "@nestjs/common";
+import { Logger, InternalServerErrorException, ConflictException } from "@nestjs/common";
 
 @EntityRepository(Todo)
 export class TodoRepository extends Repository<Todo> {
@@ -23,7 +23,6 @@ export class TodoRepository extends Repository<Todo> {
     }
     async createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
         const { title, userType } = createTodoDto;
-
         const todo = new Todo();
         todo.title = title;
         todo.photo = 'no photo'; //add photos for tasks here
@@ -33,6 +32,10 @@ export class TodoRepository extends Repository<Todo> {
         try {
             await todo.save();
         } catch (e) {
+            if (e.code = '23505') {
+                throw new ConflictException('Title already exists')
+            }
+            console.log(e.code)
             this.logger.error(`Failed to create todo. Data ${createTodoDto}`, e.stack)
             throw new InternalServerErrorException();
         }

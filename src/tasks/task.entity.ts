@@ -10,11 +10,11 @@ export class User extends BaseEntity {
     @Column()
     type: string;
 
-    @OneToMany(type => Todo, todo => todo.task, { eager: true })
-    todos: Todo[];
+    // @OneToMany(type => Todo, todo => todo.task, { eager: true })
+    // todos: Todo[];
 
-    async validatePassword(password: string): Promise<boolean> {
-        const hash = await bycrypt.hash(password, this.salt)
-        return hash === this.password;
-    }
+    // async validatePassword(password: string): Promise<boolean> {
+    //     const hash = await bycrypt.hash(password, this.salt)
+    //     return hash === this.password;
+    // }
 }

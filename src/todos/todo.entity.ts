@@ -1,6 +1,7 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne } from "typeorm";
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, Unique } from "typeorm";
 
 @Entity()
+@Unique(['title'])
 export class Todo extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
@@ -14,8 +15,8 @@ export class Todo extends BaseEntity {
     @Column()
     userType: string;
 
-    @Column()
-    
+    // @Column()
+
 
     // @ManyToOne(type => User, user => user.tasks, { eager: false })
     // user: User;

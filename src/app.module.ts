@@ -5,13 +5,19 @@ import { AuthModule } from './auth/auth.module';
 import { AppGateway } from './app.gateway';
 import { TodosModule } from './todos/todos.module';
 import { TasksModule } from './tasks/tasks.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
     TasksModule,
     TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
-    TodosModule
+    TodosModule,
+    GraphQLModule.forRoot({
+      debug: false,
+      playground: true,
+      typePaths: ['./**/*.graphql']
+    }),
   ],
   providers: [AppGateway],
 })
